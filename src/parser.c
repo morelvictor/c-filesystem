@@ -24,7 +24,6 @@ void print_index(w_index *pi) {
 
 int nbr_words(int (*f)(int), char *s) {
 	int i = 0;
-	char prev = '\0';
 	for(size_t c = 0; s[c] != '\0'; ++c) {
 		if(f(s[c]))
 			i += 1;

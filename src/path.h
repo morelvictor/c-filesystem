@@ -1,4 +1,3 @@
-
 #ifndef PATH_H
 #define PATH_H
 
@@ -12,7 +11,10 @@ struct path {
 
 typedef struct path path;
 
-
-node *pton(node *, path *);
+/**
+ * Convert a path to a node if it exists
+ * Exit if the desired path doesn't exist
+ */
+extern node *pton(node *, path *);
 
 #endif
