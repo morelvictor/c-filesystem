@@ -1,26 +1,21 @@
+#include "node.h"
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
-struct node;
-struct node_list;
+void free_node_list(node_list *l) {
+	free_node(l->no);
+	free_node_list(l->succ);
+	free(l);
+}
 
-struct node {
-	bool is_folder;
-	char title[100];
-	struct node *father;
-	struct node *root;
-	struct node_list *children;
-};
+void remove_node(node *n, node_list *l) {
+	
+}
 
-struct node_list {
-	struct node *no;
-	struct node_list *succ;
-};
-
-typedef struct node node;
-typedef struct node_list node_list;
+void free_node(node *n) {
+	
+}
 
 void print_node_list(node_list *l) {
 	if(l->succ != NULL) {
@@ -28,11 +23,11 @@ void print_node_list(node_list *l) {
 	}
 }
 
-void ls(node *n) {
-	print_node_list(n->children);
+void ls(node *current) {
+	print_node_list(current->children);
 }
 
-void cd(node curr, char *dest) {
+void cd(node *curr, char *dest) {
 	
 }
 

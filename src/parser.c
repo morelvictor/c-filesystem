@@ -1,17 +1,10 @@
 
+#include "parser.h"
 #include <stdio.h>
-#include <stdlib.h>
 #include <ctype.h>
 #include <stdbool.h>
 #include <assert.h>
 #include <string.h>
-
-struct w_index {
-	size_t size;
-	char **words;
-};
-
-typedef struct w_index w_index;
 
 void free_index(w_index *pi) {
 	for(size_t i = 0; i < pi->size; ++i) {
@@ -29,7 +22,7 @@ void print_index(w_index *pi) {
 	}
 }
 
-int nbr_words(bool (*f)(char), char *s) {
+int nbr_words(int (*f)(int), char *s) {
 	int i = 0;
 	char prev = '\0';
 	for(size_t c = 0; s[c] != '\0'; ++c) {
@@ -57,7 +50,7 @@ char *extract_word(const char *w, int *pl) {
 	return memmove(c, w, *pl * sizeof(char));
 }
 
-char *next_word(bool (*f)(char), char *w) {
+char *next_word(int (*f)(int), char *w) {
 	char *c = w;
 	while(f(*c) || *c == '\0') {
 		if(*c == '\0')
@@ -67,7 +60,7 @@ char *next_word(bool (*f)(char), char *w) {
 	return c;
 }
 
-w_index *cons_index(bool (*f)(char), char *s) {
+w_index *cons_index(int (*f)(int), char *s) {
 	w_index *acc = malloc(sizeof(w_index));
 	acc->size = nbr_words(f, s);
 	acc -> words = malloc(acc->size * sizeof(char *));
@@ -79,4 +72,6 @@ w_index *cons_index(bool (*f)(char), char *s) {
 	}
 	return acc;
 }
+
+
 
