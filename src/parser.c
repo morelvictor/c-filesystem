@@ -79,10 +79,6 @@ int is_slash(int c) {
 	return c == '/';
 }
 
-/*
- * Soucis de parsage pour
- * "Td/Cours/td" -> ["Td", "Cours"]
- */
 w_index *split_slash(char *s) {
 	return cons_index(is_slash, s);
 }
