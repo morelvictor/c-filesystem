@@ -15,13 +15,14 @@ void free_index(w_index *pi) {
 }
 
 void print_index(w_index *pi) {
-	printf("nbr: %zu\n", pi->size);
-	printf("words:\n");
+	//printf("nbr: %zu\n", pi->size);
+	//printf("words:\n");
 	for(size_t i = 0; i < pi->size; ++i) {
 		printf("%s\n", pi->words[i]);
 	}
 }
 
+/* Ca marche bien */
 int nbr_words(int (*f)(int), char *s) {
 	int i = 0;
 	for(size_t c = 0; s[c] != '\0'; ++c) {
@@ -31,20 +32,20 @@ int nbr_words(int (*f)(int), char *s) {
 	return i;
 }
 
-int word_len(const char *w) {
-	assert(isalpha(*w));
+int word_len(int(*f)(int), const char *w) {
+	assert(isalpha(*w) || !f(*w));
 	int i = 0;
 	
-	for(size_t c = 0; isalpha(w[c]); ++c) {
+	for(size_t c = 0; isalpha(w[c]) || !f(w[c]); ++c) {
 		++i;
 	}
 
 	return i;
 }
 
-char *extract_word(const char *w, int *pl) {
-	assert(isalpha(*w));
-	*pl = word_len(w);
+char *extract_word(int(*f)(int), const char *w, int *pl) {
+	assert(isalpha(*w) || *w == '/');
+	*pl = word_len(f, w);
 	char *c = malloc(*pl * sizeof(char));
 	return memmove(c, w, *pl * sizeof(char));
 }
@@ -66,7 +67,7 @@ w_index *cons_index(int (*f)(int), char *s) {
 	char *current = next_word(f, s);
 	for(int i = 0; current != NULL && i < acc->size; ++i) {
 		int pl = -1;
-		acc -> words[i] = extract_word(current, &pl);
+		acc -> words[i] = extract_word(f, current, &pl);
 		current = next_word(f, current + pl);
 	}
 	return acc;

@@ -4,7 +4,7 @@ mkdir ProjetC
 mkdir Anglais
 cd
 touch edt
-cp Cours / Td
+cp Cours /Td
 rm /Td/ProjetC
 rm /Td/Anglais
 cd Td

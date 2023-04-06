@@ -35,6 +35,7 @@ int main(int argc, char *argv[]) {
 	 **/
 	while(fgets(current_line, MAX_CHAR, file) != NULL) {
 		print_index(split_space(current_line));
+		puts("---");
 	}
 	
 	fclose(file);
