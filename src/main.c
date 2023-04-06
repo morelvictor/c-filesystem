@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <string.h>
 #include "node.h"
 #include "parser.h"
 
 #define MAX_CHAR 500
+
+void executor(node *, w_index *);
 
 int main(int argc, char *argv[]) {
 	assert(argc >= 2);
@@ -35,17 +38,38 @@ int main(int argc, char *argv[]) {
 	 **/
 	while(fgets(current_line, MAX_CHAR, file) != NULL) {
 		w_index *i = split_space(current_line);
-		print_index(i);
-		if(i->size > 1) {
-			puts("~~~");
-			w_index *j = split_slash(i->words[1]);
-			print_index(j);
-		}
-		puts("---");
+		executor(current, i);
+		free_index(i);
 	}
 	
 	fclose(file);
 
 	return EXIT_SUCCESS;
+}
+
+void executor(node *n, w_index *i) {
+	assert(i->size >= 1);
+	if(!strcmp(i->words[0], "ls")) {
+		ls(n);
+	} else if(!strcmp(i->words[0], "cd")) {
+		cd(n, i);
+	} else if(!strcmp(i->words[0], "pwd")) {
+		pwd(n);
+	} else if(!strcmp(i->words[0], "mkdir")) {
+		mkdir(n, i);
+	} else if(!strcmp(i->words[0], "touch")) {
+		touch(n, i);
+	} else if(!strcmp(i->words[0], "rm")) {
+		rm(n, i);
+	} else if(!strcmp(i->words[0], "cp")) {
+		cp(n, i);
+	} else if(!strcmp(i->words[0], "mv")) {
+		mv(n, i);
+	} else if(!strcmp(i->words[0], "print")) {
+		print(n);
+	} else {
+		fprintf(stderr, "\nErreur: Commande inexistante %s\n", i->words[0]);
+		exit(EXIT_FAILURE);
+	}
 }
 

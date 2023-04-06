@@ -45,11 +45,47 @@ void print_node_list(node_list *l) {
 	}
 }
 
-void ls(node *current) {
-	print_node_list(current->children);
+void ls(node *curr) {
+	print_node_list(curr->children);
 }
 
 void cd(node *curr, w_index *dest) {
-	
+	puts("Error: cd not implemented");
+	exit(EXIT_FAILURE);
+}
+
+void pwd(node *curr) {
+	puts("Error: pwd not implemented");
+	exit(EXIT_FAILURE);
+}
+
+void mkdir(node *curr, w_index *i) {
+	puts("Error: mkdir not implemented");
+	exit(EXIT_FAILURE);
+}
+
+void touch(node *curr, w_index *i) {
+	puts("Error: touch not implemented");
+	exit(EXIT_FAILURE);
+}
+
+void rm(node *curr, w_index *i) {
+	puts("Error: rm not implemented");
+	exit(EXIT_FAILURE);
+}
+
+void cp(node *curr, w_index *i) {
+	puts("Error: cp not implemented");
+	exit(EXIT_FAILURE);
+}
+
+void mv(node *curr, w_index *i) {
+	puts("Error: mv not implemented");
+	exit(EXIT_FAILURE);
+}
+
+void print(node *curr) {
+	puts("Error: print not implemented");
+	exit(EXIT_FAILURE);
 }
 
