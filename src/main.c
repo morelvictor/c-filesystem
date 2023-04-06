@@ -20,6 +20,7 @@ int main(int argc, char *argv[]) {
 		fprintf(stderr, "\nErreur: Impossible de lire le fichier %s\n", argv[1]);
 		return(EXIT_FAILURE);
 	}
+
 	char *current_line = malloc(MAX_CHAR * sizeof(char));
 	assert(current_line != NULL);
 

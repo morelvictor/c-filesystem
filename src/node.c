@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 void free_node_list(node_list *l) {
-	if(l->succ != NULL) {
+	if(l != NULL) {
 		free_node(l->no);
 		free_node_list(l->succ);
 		free(l);
