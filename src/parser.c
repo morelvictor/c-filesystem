@@ -72,5 +72,17 @@ w_index *cons_index(int (*f)(int), char *s) {
 	return acc;
 }
 
+int is_slash(int c) {
+	return c == '/';
+}
+
+w_index *split_slash(char *s) {
+	return cons_index(is_slash, s);
+}
+
+w_index *split_space(char *s) {
+	return cons_index(isspace, s);
+}
+
 
 

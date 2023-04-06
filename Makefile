@@ -4,7 +4,7 @@ SRC_DIR = src
 BUILD_DIR = .out
 
 build: main.o node.o parser.o path.o
-	gcc -o main $(BUILD_DIR)/$<
+	gcc -o main .out/main.o .out/node.o .out/parser.o .out/path.o
 
 run: build
 	./main
