@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
 	 * On assigne sa valeur a file et si il y a une erreur de lecture on la signale et on arrete le programme
 	 **/
 	if((file = fopen(argv[1], "r")) == NULL) {
-		fprintf(stderr, "\n\x1b[1;31mErreur: Impossible de lire le fichier %s\n", argv[1]);
+		fprintf(stderr, "\nErreur: Impossible de lire le fichier %s\n", argv[1]);
 		return(EXIT_FAILURE);
 	}
 	char *current_line = malloc(MAX_CHAR * sizeof(char));
@@ -37,7 +37,9 @@ int main(int argc, char *argv[]) {
 		w_index *i = split_space(current_line);
 		print_index(i);
 		if(i->size > 1) {
+			puts("~~~");
 			w_index *j = split_slash(i->words[1]);
+			print_index(j);
 		}
 		puts("---");
 	}

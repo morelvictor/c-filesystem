@@ -9,6 +9,9 @@ build: main.o node.o parser.o path.o
 run: build
 	./main
 
+test: build
+	./main instr.txt
+
 clean:
 	rm -f $(BUILD_DIR)/*.o main
 

@@ -22,12 +22,15 @@ void print_index(w_index *pi) {
 	}
 }
 
-/* Ca marche bien */
+/* Origine de mon malheur*/
 int nbr_words(int (*f)(int), char *s) {
 	int i = 0;
+	bool pre_s = true;
+	
 	for(size_t c = 0; s[c] != '\0'; ++c) {
-		if(f(s[c]))
-			i += 1;
+		if(pre_s && !f(s[c]))
+			++i;
+		pre_s = f(s[c]);
 	}
 	return i;
 }
@@ -36,15 +39,14 @@ int word_len(int(*f)(int), const char *w) {
 	assert(isalpha(*w) || !f(*w));
 	int i = 0;
 	
-	for(size_t c = 0; isalpha(w[c]) || !f(w[c]); ++c) {
+	for(size_t c = 0; (isalpha(w[c]) || !f(w[c])) && w[c] != '\0' ; ++c) {
 		++i;
 	}
-
 	return i;
 }
 
 char *extract_word(int(*f)(int), const char *w, int *pl) {
-	assert(isalpha(*w) || *w == '/');
+	assert(isalpha(*w) || !f(*w));
 	*pl = word_len(f, w);
 	char *c = malloc(*pl * sizeof(char));
 	return memmove(c, w, *pl * sizeof(char));
@@ -77,6 +79,10 @@ int is_slash(int c) {
 	return c == '/';
 }
 
+/*
+ * Soucis de parsage pour
+ * "Td/Cours/td" -> ["Td", "Cours"]
+ */
 w_index *split_slash(char *s) {
 	return cons_index(is_slash, s);
 }
