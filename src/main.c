@@ -34,7 +34,11 @@ int main(int argc, char *argv[]) {
 	 * on execute sur l'index
 	 **/
 	while(fgets(current_line, MAX_CHAR, file) != NULL) {
-		print_index(split_space(current_line));
+		w_index *i = split_space(current_line);
+		print_index(i);
+		if(i->size > 1) {
+			w_index *j = split_slash(i->words[1]);
+		}
 		puts("---");
 	}
 	
