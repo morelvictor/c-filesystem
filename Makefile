@@ -1,4 +1,4 @@
-.PHONY: build run clean
+.PHONY: build run clean deps
 
 SRC_DIR = src
 BUILD_DIR = .out
@@ -11,6 +11,9 @@ run: build
 
 clean:
 	rm -f $(BUILD_DIR)/*.o main
+
+deps:
+	gcc -MM src/*.c
 
 %.o: $(SRC_DIR)/%.c
 	-mkdir -p $(BUILD_DIR)
