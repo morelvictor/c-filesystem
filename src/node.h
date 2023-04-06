@@ -2,9 +2,9 @@
 #define NODE_H
 
 #include "parser.h"
-
 #include <stdbool.h>
 
+#define MAX_TITLE_LENGH 100
 
 struct node;
 struct node_list;
@@ -12,7 +12,7 @@ struct node_list;
 
 struct node {
 	bool is_folder;
-	char title[100];
+	char title[MAX_TITLE_LENGH];
 	struct node *father;
 	struct node *root;
 	struct node_list *children;
@@ -28,6 +28,8 @@ typedef struct node_list node_list;
 
 extern void free_node_list(node_list *);
 extern void free_node(node *);
+
+extern node *cons_node(bool, char *, node *, node *, node_list *);
 
 extern void ls(node *);
 extern void cd(node *, w_index *);
