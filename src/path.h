@@ -6,10 +6,13 @@
 
 struct path {
 	enum { ABS, REL } type;
-	w_index elem;
+	w_index *elem;
 };
 
 typedef struct path path;
+
+
+extern void free_path(path *);
 
 /**
  * Convert a path to a node if it exists

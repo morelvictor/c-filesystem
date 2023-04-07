@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void free_node_list(node_list *l) {
 	if(l != NULL) {
@@ -45,47 +46,57 @@ void print_node_list(node_list *l) {
 	}
 }
 
+node *get_node(node_list *l, char *title) {
+	if(l == NULL)
+		return NULL;
+	if(strcmp(title, l->no->title)) {
+		return l->no;
+	} else {
+		return get_node(l->succ, title);
+	}
+}
+
 void ls(node *curr) {
 	print_node_list(curr->children);
 }
 
 void cd(node *curr, w_index *dest) {
 	puts("Error: cd not implemented");
-	exit(EXIT_FAILURE);
+	//exit(EXIT_FAILURE);
 }
 
 void pwd(node *curr) {
 	puts("Error: pwd not implemented");
-	exit(EXIT_FAILURE);
+	//exit(EXIT_FAILURE);
 }
 
 void mkdir(node *curr, w_index *i) {
 	puts("Error: mkdir not implemented");
-	exit(EXIT_FAILURE);
+	//exit(EXIT_FAILURE);
 }
 
 void touch(node *curr, w_index *i) {
 	puts("Error: touch not implemented");
-	exit(EXIT_FAILURE);
+	//exit(EXIT_FAILURE);
 }
 
 void rm(node *curr, w_index *i) {
 	puts("Error: rm not implemented");
-	exit(EXIT_FAILURE);
+	//exit(EXIT_FAILURE);
 }
 
 void cp(node *curr, w_index *i) {
 	puts("Error: cp not implemented");
-	exit(EXIT_FAILURE);
+	//exit(EXIT_FAILURE);
 }
 
 void mv(node *curr, w_index *i) {
 	puts("Error: mv not implemented");
-	exit(EXIT_FAILURE);
+	//exit(EXIT_FAILURE);
 }
 
 void print(node *curr) {
 	puts("Error: print not implemented");
-	exit(EXIT_FAILURE);
+	//exit(EXIT_FAILURE);
 }
 
