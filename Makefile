@@ -2,9 +2,10 @@
 
 SRC_DIR = src
 BUILD_DIR = .out
+OBJ = main.o node.o node_list.o parser.o path.o
 
-build: main.o node.o parser.o path.o
-	gcc -o main .out/main.o .out/node.o .out/parser.o .out/path.o
+build: $(OBJ)
+	gcc -Wall -o main $(OBJ:%=$(BUILD_DIR)/%)
 
 run: build
 	./main

@@ -2,13 +2,12 @@
 #define NODE_H
 
 #include "parser.h"
+#include "node_list.h"
 #include <stdbool.h>
 
 #define MAX_TITLE_LENGH 100
 
-struct node;
 struct node_list;
-
 
 struct node {
 	bool is_folder;
@@ -16,11 +15,6 @@ struct node {
 	struct node *father;
 	struct node *root;
 	struct node_list *children;
-};
-
-struct node_list {
-	struct node *no;
-	struct node_list *succ;
 };
 
 typedef struct node node;
