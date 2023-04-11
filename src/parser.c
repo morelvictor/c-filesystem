@@ -22,7 +22,6 @@ void print_index(w_index *pi) {
 	}
 }
 
-/* Origine de mon malheur*/
 int nbr_words(int (*f)(int), char *s) {
 	int i = 0;
 	bool pre_s = true;
@@ -86,6 +85,5 @@ w_index *split_slash(char *s) {
 w_index *split_space(char *s) {
 	return cons_index(isspace, s);
 }
-
 
 
