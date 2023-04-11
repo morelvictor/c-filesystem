@@ -3,6 +3,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
+
+
+node_list *l_cons(node_list *succ, node *n) {
+	node_list *acc = malloc(sizeof(node));
+	acc->succ = succ;
+	acc->no = n;
+	return acc;
+}
 
 void free_node_list(node_list *l) {
 	if(l != NULL) {
@@ -12,13 +21,30 @@ void free_node_list(node_list *l) {
 	}
 }
 
-void remove_node(node *n, node_list *l) {
-	
+node_list *l_remove(node_list *l, node *n) {
+	if(l->no == n) {
+		return l->succ;
+	} else {
+		l->succ = l_remove(l->succ, n);
+		return l;
+	}
+}
+
+node_list *l_add(node_list *l, node *n) {
+	return l_cons(l, n);
 }
 
 void free_node(node *n) {
-	
+	/*
+	 * On enleve le node a liberer de la liste des enfant de son pere
+	 * puis on free la liste des enfants
+	 * puis le node
+	 */
+	l_remove(n->father->children, n);
+	free_node_list(n->children);
+	free(n);
 }
+
 
 node *cons_node(bool is_folder, char *title, node *root, node *father, node_list *children) {
 	node *acc = malloc(sizeof(node));
@@ -60,7 +86,9 @@ void ls(node *curr) {
 	print_node_list(curr->children);
 }
 
-void cd(node *curr, w_index *dest) {
+void cd(node *curr, w_index *i) {
+	assert(i->size >= 1);
+	
 	puts("Error: cd not implemented");
 	//exit(EXIT_FAILURE);
 }
@@ -71,26 +99,34 @@ void pwd(node *curr) {
 }
 
 void mkdir(node *curr, w_index *i) {
-	puts("Error: mkdir not implemented");
+	assert(i->size >= 2);
+	for(int x = 1; x < i->size; ++x) {
+		
+	}
 	//exit(EXIT_FAILURE);
 }
 
 void touch(node *curr, w_index *i) {
+	assert(i->size >= 2);
 	puts("Error: touch not implemented");
+	
 	//exit(EXIT_FAILURE);
 }
 
 void rm(node *curr, w_index *i) {
+	assert(i->size >= 2);
 	puts("Error: rm not implemented");
 	//exit(EXIT_FAILURE);
 }
 
 void cp(node *curr, w_index *i) {
+	assert(i->size == 3);
 	puts("Error: cp not implemented");
 	//exit(EXIT_FAILURE);
 }
 
 void mv(node *curr, w_index *i) {
+	assert(i->size == 3);
 	puts("Error: mv not implemented");
 	//exit(EXIT_FAILURE);
 }
