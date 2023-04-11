@@ -18,6 +18,9 @@ clean:
 deps:
 	gcc -MM src/*.c
 
+leaks: build
+	leaks -atExit -- ./main instr.txt
+
 %.o: $(SRC_DIR)/%.c
 	-mkdir -p $(BUILD_DIR)
 	gcc -Wall -o $(BUILD_DIR)/$@ -c $<

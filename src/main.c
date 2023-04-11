@@ -44,6 +44,7 @@ int main(int argc, char *argv[]) {
 	}
 	
 	fclose(file);
+	free_node(current);
 
 	return EXIT_SUCCESS;
 }
