@@ -45,16 +45,6 @@ node *cons_node(bool is_folder, char *title, node *root, node *father, node_list
 	return acc;
 }
 
-node *get_node(node_list *l, char *title) {
-	if(l == NULL)
-		return NULL;
-	if(strcmp(title, l->no->title)) {
-		return l->no;
-	} else {
-		return get_node(l->succ, title);
-	}
-}
-
 void ls(node **curr) {
 	print_node_list((*curr)->children);
 }
@@ -63,14 +53,10 @@ void cd(node **curr, w_index *i) {
 	assert(i->size >= 1);
 	if(i->size == 1) {
 		*curr = (*curr)->root;
-		return;
 	} else {
-		path *p = cons_path(i->words[1]);
-		node *acc = pton(*curr, p);
-
+		node *acc = pton(*curr, cons_path(i->words[1]));
 		if(acc != NULL) {
 			*curr = acc;
-			puts("ok");
 		} else {
 			puts("Cd: repertoire inexistant");
 			exit(EXIT_FAILURE);
