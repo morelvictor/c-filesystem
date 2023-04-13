@@ -23,7 +23,6 @@ typedef struct node_list node_list;
 extern void free_node(node *);
 
 extern node *cons_node(bool, char *, node *, node *, node_list *);
-extern node *get_node(node_list *, char *);
 
 extern void ls(node **);
 extern void cd(node **, w_index *);

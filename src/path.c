@@ -18,7 +18,7 @@ node *pton(node *curr, path *p) {
 	}
 	for(int i = 0; i < p->index->size; ++i) {
 		if((now = get_node(curr->children, p->index->words[i])) == NULL)
-		return NULL;
+			return NULL;
 	}
 	free_path(p);
 	return now;

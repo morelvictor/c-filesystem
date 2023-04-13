@@ -2,7 +2,6 @@ mkdir Cours
 pwd
 mkdir Td
 mkdir edt
-touch gay
 ls
-cd Tdzef
+cd Td
 pwd

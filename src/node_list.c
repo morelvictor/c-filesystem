@@ -62,6 +62,16 @@ node_list *l_add(node_list *l, node *n) {
 	return l_cons(l, n);
 }
 
+node *get_node(node_list *l, char *title) {
+	if(l == NULL)
+		return NULL;
+	if(!strcmp(title, l->no->title)) {
+		return l->no;
+	} else {
+		return get_node(l->succ, title);
+	}
+}
+
 void print_node_list(node_list *l) {
 	if(l == NULL) {
 		printf("\n");
