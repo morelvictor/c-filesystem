@@ -6,7 +6,7 @@
 
 struct path {
 	enum { ABS, REL } type;
-	w_index *elem;
+	w_index *index;
 };
 
 typedef struct path path;
@@ -19,5 +19,6 @@ extern void free_path(path *);
  * Exit if the desired path doesn't exist
  */
 extern node *pton(node *, path *);
+extern path *cons_path(char *);
 
 #endif

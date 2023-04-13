@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include "path.h"
 
 void free_node(node *n) {
 	/*
@@ -11,11 +12,13 @@ void free_node(node *n) {
 	 * puis on free la liste des enfants
 	 * puis le node
 	 */
-	l_remove(n->father->children, n);
-	free_node_list(n->children);
+	if(n == NULL)
+		return;
+	if(n->children != NULL) {
+		free_node_list(n->children);
+	}
 	free(n);
 }
-
 
 node *cons_node(bool is_folder, char *title, node *root, node *father, node_list *children) {
 	node *acc = malloc(sizeof(node));
@@ -26,21 +29,20 @@ node *cons_node(bool is_folder, char *title, node *root, node *father, node_list
 	acc->is_folder = is_folder;
 	acc->root = root;
 	acc->father = father;
+
+	if(acc->father != NULL) {
+		acc->father->children = l_add(acc->father->children, acc);
+	}
 	acc->children = children;
 
 	size_t c = 0;
 	while(c < 99 && title[c] != '\0') {
 		acc->title[c] = title[c];
+		++c;
 	}
-	acc->title[c] = '\0';
+	acc->title[99] = '\0';
 
 	return acc;
-}
-
-void print_node_list(node_list *l) {
-	if(l->succ != NULL) {
-		printf("%s\n", l->no->title);
-	}
 }
 
 node *get_node(node_list *l, char *title) {
@@ -53,56 +55,71 @@ node *get_node(node_list *l, char *title) {
 	}
 }
 
-void ls(node *curr) {
-	print_node_list(curr->children);
+void ls(node **curr) {
+	print_node_list((*curr)->children);
 }
 
-void cd(node *curr, w_index *i) {
+void cd(node **curr, w_index *i) {
 	assert(i->size >= 1);
-	
-	puts("Error: cd not implemented");
-	//exit(EXIT_FAILURE);
+	if(i->size == 1) {
+		*curr = (*curr)->root;
+		return;
+	} else {
+		path *p = cons_path(i->words[1]);
+		node *acc = pton(*curr, p);
+
+		if(acc != NULL) {
+			*curr = acc;
+			puts("ok");
+		} else {
+			puts("Cd: repertoire inexistant");
+			exit(EXIT_FAILURE);
+		}
+	}
 }
 
-void pwd(node *curr) {
-	puts("Error: pwd not implemented");
-	//exit(EXIT_FAILURE);
+void pwd(node **curr) {
+	printf("Nom: %s\n", (*curr)->title);
 }
 
-void mkdir(node *curr, w_index *i) {
+void mkdir(node **curr, w_index *i) {
 	assert(i->size >= 2);
 	for(int x = 1; x < i->size; ++x) {
-		
+		cons_node(true, i->words[x], (*curr)->root, (*curr), NULL);
 	}
-	//exit(EXIT_FAILURE);
 }
 
-void touch(node *curr, w_index *i) {
+void touch(node **curr, w_index *i) {
 	assert(i->size >= 2);
-	puts("Error: touch not implemented");
-	
-	//exit(EXIT_FAILURE);
+	for(int x = 1; x < i->size; ++x) {
+		cons_node(false, i->words[x], (*curr)->root, (*curr), NULL);
+	}
 }
 
-void rm(node *curr, w_index *i) {
+void rm(node **curr, w_index *i) {
 	assert(i->size >= 2);
 	puts("Error: rm not implemented");
 	//exit(EXIT_FAILURE);
+	/* 
+	if(n->father != NULL) {
+		l_remove(&n->father->children, n);
+	}
+	 * */
 }
 
-void cp(node *curr, w_index *i) {
+void cp(node **curr, w_index *i) {
 	assert(i->size == 3);
 	puts("Error: cp not implemented");
 	//exit(EXIT_FAILURE);
 }
 
-void mv(node *curr, w_index *i) {
+void mv(node **curr, w_index *i) {
 	assert(i->size == 3);
 	puts("Error: mv not implemented");
 	//exit(EXIT_FAILURE);
 }
 
-void print(node *curr) {
+void print(node **curr) {
 	puts("Error: print not implemented");
 	//exit(EXIT_FAILURE);
 }
