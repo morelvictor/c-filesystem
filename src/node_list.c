@@ -16,16 +16,58 @@ void free_node_list(node_list *l) {
 	}
 }
 
-node_list *l_remove(node_list *l, node *n) {
-	if(l->no == n) {
-		return l->succ;
-	} else {
-		l->succ = l_remove(l->succ, n);
-		return l;
-	}
+node *pop(node_list ** head) {
+    node *retval = NULL;
+    node_list * next_node = NULL;
+
+    if (*head == NULL) {
+        return NULL;
+    }
+
+    next_node = (*head)->succ;
+    retval = (*head)->no;
+    free(*head);
+    *head = next_node;
+
+    return retval;
+}
+
+node *l_remove(node_list ** head, node *val) {
+    node_list *previous, *current;
+
+    if (*head == NULL) {
+        return NULL;
+    }
+
+    if ((*head)->no == val) {
+        return pop(head);
+    }
+
+    previous = *head;
+    current = (*head)->succ;
+    while (current) {
+        if (current->no == val) {
+            previous->succ = current->succ;
+            free(current);
+            return val;
+        }
+
+        previous = current;
+        current  = current->succ;
+    }
+    return NULL;
 }
 
 node_list *l_add(node_list *l, node *n) {
 	return l_cons(l, n);
+}
+
+void print_node_list(node_list *l) {
+	if(l == NULL) {
+		printf("\n");
+	} else {
+		printf("%s ", l->no->title);
+		print_node_list(l->succ);
+	}
 }
 

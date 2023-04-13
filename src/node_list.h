@@ -2,6 +2,7 @@
 #define NODE_LIST_H
 
 #include "node.h"
+#include <stdio.h>
 
 struct node;
 
@@ -15,7 +16,8 @@ typedef struct node_list node_list;
 
 extern node_list *l_cons(node_list *, node *);
 extern void free_node_list(node_list *);
-extern node_list *l_remove(node_list *, node *);
+extern node *l_remove(node_list **, node *);
 extern node_list *l_add(node_list *, node *);
+extern void print_node_list(node_list *);
 
 #endif

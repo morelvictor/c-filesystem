@@ -10,9 +10,10 @@
 void executor(node *, w_index *);
 
 int main(int argc, char *argv[]) {
+
 	assert(argc >= 2);
 	FILE *file;
-	
+
 	/*
 	 * On assigne sa valeur a file et si il y a une erreur de lecture on la signale et on arrete le programme
 	 **/
@@ -28,7 +29,7 @@ int main(int argc, char *argv[]) {
 	 * On crée le noeud racine
 	 * et on attribue sa racine et son papa
 	 **/
-	node *current = cons_node(true, "", NULL, NULL, NULL);
+	node *current = cons_node(true, "root", NULL, NULL, NULL);
 	current->root = current;
 	current->father = current;
 
@@ -42,9 +43,10 @@ int main(int argc, char *argv[]) {
 		executor(current, i);
 		free_index(i);
 	}
-	
+
 	fclose(file);
-	free_node(current);
+	free_node(current->root);
+	free(current_line);
 
 	return EXIT_SUCCESS;
 }
@@ -52,26 +54,25 @@ int main(int argc, char *argv[]) {
 void executor(node *n, w_index *i) {
 	assert(i->size >= 1);
 	if(!strcmp(i->words[0], "ls")) {
-		ls(n);
+		ls(&n);
 	} else if(!strcmp(i->words[0], "cd")) {
-		cd(n, i);
+		cd(&n, i);
 	} else if(!strcmp(i->words[0], "pwd")) {
-		pwd(n);
+		pwd(&n);
 	} else if(!strcmp(i->words[0], "mkdir")) {
-		mkdir(n, i);
+		mkdir(&n, i);
 	} else if(!strcmp(i->words[0], "touch")) {
-		touch(n, i);
+		touch(&n, i);
 	} else if(!strcmp(i->words[0], "rm")) {
-		rm(n, i);
+		rm(&n, i);
 	} else if(!strcmp(i->words[0], "cp")) {
-		cp(n, i);
+		cp(&n, i);
 	} else if(!strcmp(i->words[0], "mv")) {
-		mv(n, i);
+		mv(&n, i);
 	} else if(!strcmp(i->words[0], "print")) {
-		print(n);
+		print(&n);
 	} else {
 		fprintf(stderr, "\nErreur: Commande inexistante %s\n", i->words[0]);
 		exit(EXIT_FAILURE);
 	}
 }
-
