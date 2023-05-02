@@ -47,8 +47,24 @@ node *cons_node(bool is_folder, char *title, node *root, node *father, node_list
 }
 
 void ls(node **curr) {
-	print_node_list((*curr)->children);
+	node_list *l = (*curr)->children;
+
+	if(l == NULL) {
+		printf("\n");
+	} else {
+		while(l != NULL){
+			if(l->no->is_folder){
+				printf("\033[35;01m%s\033[00m ", l->no->title);
+			}
+			else{
+				printf("%s ", l->no->title);
+			}
+			l = l->succ;
+		}
+	}
+	printf("\n");
 }
+
 
 void cd(node **curr, w_index *i) {
 	assert(i->size >= 1);
