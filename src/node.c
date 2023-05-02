@@ -66,17 +66,7 @@ void cd(node **curr, w_index *i) {
 }
 
 void pwd(node **curr) {
-    node_list *acc = NULL;
-    node *tmp = *curr;
-    while (tmp->father != tmp) {
-        acc = l_add(acc, tmp);
-        tmp = tmp->father;
-    }
-    printf("\033[34;01m/\033[00m");
-    while(acc != NULL){
-        printf("\033[34;01m%s/\033[00m", acc->no->title);
-        acc = acc->succ;
-    }
+    pwd_in_line(curr);
     printf("\n");
 }
 
