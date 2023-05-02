@@ -66,7 +66,15 @@ void cd(node **curr, w_index *i) {
 }
 
 void pwd(node **curr) {
-	printf("Nom: %s\n", (*curr)->title);
+    node_list *acc = malloc(sizeof(node_list));
+    acc->no = *curr;
+    acc->succ = NULL;
+    while ((*curr)->father != (*curr)) {
+        l_add(acc, *curr);
+        *curr = (*curr)->father;
+    }
+    reverse_node_list(&acc);
+    print_node_list(acc);
 }
 
 void mkdir(node **curr, w_index *i) {

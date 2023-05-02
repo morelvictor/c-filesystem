@@ -4,4 +4,6 @@ mkdir Td
 mkdir edt
 ls
 cd Td
+mkdir Math
+cd Math
 pwd
