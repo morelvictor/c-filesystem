@@ -47,7 +47,8 @@ int word_len(int(*f)(int), const char *w) {
 char *extract_word(int(*f)(int), const char *w, int *pl) {
 	assert(isalpha(*w) || !f(*w));
 	*pl = word_len(f, w);
-	char *c = malloc(*pl * sizeof(char));
+	char *c = malloc(*pl * sizeof(char) + *pl);
+	c[*pl] = '\0';
 	return memmove(c, w, *pl * sizeof(char));
 }
 

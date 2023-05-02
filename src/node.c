@@ -35,12 +35,13 @@ node *cons_node(bool is_folder, char *title, node *root, node *father, node_list
 	}
 	acc->children = children;
 
+
 	size_t c = 0;
 	while(c < 99 && title[c] != '\0') {
 		acc->title[c] = title[c];
 		++c;
 	}
-	acc->title[99] = '\0';
+	acc->title[c] = '\0';
 
 	return acc;
 }
