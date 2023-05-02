@@ -1,11 +1,10 @@
 mkdir Cours
-pwd
+mkdir Tp
+mkdir Td
+touch notes.txt
+ls
 cd Cours
 mkdir Info
 cd Info
-mkdir Langage_C
-cd Langage_C
-mkdir Amphi1
-cd Amphi1
 pwd
-pwd
+
