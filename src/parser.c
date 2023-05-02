@@ -22,6 +22,15 @@ void print_index(w_index *pi) {
 	}
 }
 
+void print_index_in_line(w_index *pi) {
+	//printf("nbr: %zu\n", pi->size);
+	//printf("words:\n");
+	for(size_t i = 0; i < pi->size; ++i) {
+		printf("%s ", pi->words[i]);
+	}
+	printf("\n");
+}
+
 int nbr_words(int (*f)(int), char *s) {
 	int i = 0;
 	bool pre_s = true;

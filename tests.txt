@@ -8,3 +8,4 @@ cd Langage_C
 mkdir Amphi1
 cd Amphi1
 pwd
+pwd
