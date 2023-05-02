@@ -71,8 +71,23 @@ void pwd(node **curr) {
         acc = l_add(acc, *curr);
         *curr = (*curr)->father;
     }
+	printf("\033[34;01m/\033[00m");
     while(acc != NULL){
-		printf("/%s", acc->no->title);
+		printf("\033[34;01m%s/\033[00m", acc->no->title);
+		acc = acc->succ;
+	}
+	printf("\n");
+}
+
+void pwd_in_line(node **curr) {
+    node_list *acc = NULL;
+    while ((*curr)->father != (*curr)) {
+        acc = l_add(acc, *curr);
+        *curr = (*curr)->father;
+    }
+	printf("\033[34;01m/\033[00m");
+    while(acc != NULL){
+		printf("\033[34;01m%s/\033[00m", acc->no->title);
 		acc = acc->succ;
 	}
 }

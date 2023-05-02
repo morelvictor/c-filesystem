@@ -1,4 +1,5 @@
 mkdir Cours
+pwd
 cd Cours
 mkdir Info
 cd Info
