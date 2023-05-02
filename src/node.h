@@ -27,6 +27,7 @@ extern node *cons_node(bool, char *, node *, node *, node_list *);
 extern void ls(node **);
 extern void cd(node **, w_index *);
 extern void pwd(node **);
+extern void pwd_in_line(node **);
 extern void mkdir(node **, w_index *);
 extern void touch(node **, w_index *);
 extern void rm(node **, w_index *);

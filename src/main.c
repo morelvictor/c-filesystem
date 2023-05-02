@@ -55,22 +55,40 @@ int main(int argc, char *argv[]) {
 void executor(node **n, w_index *i) {
 	assert(i->size >= 1);
 	if(!strcmp(i->words[0], "ls")) {
+		printf("\033[32;01mVictor-Ayman@Linux-desktop:\033[00m"); pwd_in_line(n); printf("$ ");
+		print_index_in_line(i);	
 		ls(n);
 	} else if(!strcmp(i->words[0], "cd")) {
+		printf("\033[32;01mVictor-Ayman@Linux-desktop:\033[00m"); pwd_in_line(n); printf("$ ");
+		print_index_in_line(i);	
 		cd(n, i);
 	} else if(!strcmp(i->words[0], "pwd")) {
+		printf("\033[32;01mVictor-Ayman@Linux-desktop:\033[00m"); pwd_in_line(n); printf("$ ");
+		print_index_in_line(i);	
 		pwd(n);
 	} else if(!strcmp(i->words[0], "mkdir")) {
+		printf("\033[32;01mVictor-Ayman@Linux-desktop:\033[00m"); pwd_in_line(n); printf("$ ");
+		print_index_in_line(i);	
 		mkdir(n, i);
 	} else if(!strcmp(i->words[0], "touch")) {
+		printf("\033[32;01mVictor-Ayman@Linux-desktop:\033[00m"); pwd_in_line(n); printf("$ ");
+		print_index_in_line(i);	
 		touch(n, i);
 	} else if(!strcmp(i->words[0], "rm")) {
+		printf("\033[32;01mVictor-Ayman@Linux-desktop:\033[00m"); pwd_in_line(n); printf("$ ");
+		print_index_in_line(i);	
 		rm(n, i);
 	} else if(!strcmp(i->words[0], "cp")) {
+		printf("\033[32;01mVictor-Ayman@Linux-desktop:\033[00m"); pwd_in_line(n); printf("$ ");
+		print_index_in_line(i);	
 		cp(n, i);
 	} else if(!strcmp(i->words[0], "mv")) {
+		printf("\033[32;01mVictor-Ayman@Linux-desktop:\033[00m"); pwd_in_line(n); printf("$ ");
+		print_index_in_line(i);	
 		mv(n, i);
 	} else if(!strcmp(i->words[0], "print")) {
+		printf("\033[32;01mVictor-Ayman@Linux-desktop:\033[00m"); pwd_in_line(n); printf("$ ");
+		print_index_in_line(i);	
 		print(n);
 	} else {
 		fprintf(stderr, "\nErreur: Commande inexistante %s\n", i->words[0]);

@@ -1,7 +1,11 @@
 mkdir Cours
 pwd
-mkdir Td
-mkdir edt
-ls
-cd Td
+cd Cours
+mkdir Info
+cd Info
+mkdir Langage_C
+cd Langage_C
+mkdir Amphi1
+cd Amphi1
+pwd
 pwd
