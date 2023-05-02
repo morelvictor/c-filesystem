@@ -81,18 +81,3 @@ void print_node_list(node_list *l) {
 	}
 }
 
-void reverse_node_list(struct node_list **head) {
-    struct node_list *prev = NULL;
-    struct node_list *current = *head;
-    struct node_list *next = NULL;
-
-    while (current != NULL) {
-        next = current->succ;
-        current->succ = prev;
-        prev = current;
-        current = next;
-    }
-
-    *head = prev;
-}
-
