@@ -96,7 +96,9 @@ void pwd_in_line(node **curr) {
     printf("\033[34;01m/\033[00m");
     while(acc != NULL){
         printf("\033[34;01m%s/\033[00m", acc->no->title);
+		  node_list *prec = acc;
         acc = acc->succ;
+		  free(prec);
     }
 }
 

@@ -7,4 +7,3 @@ cd Cours
 mkdir Info
 cd Info
 pwd
-
