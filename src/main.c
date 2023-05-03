@@ -53,7 +53,8 @@ int main(int argc, char *argv[]) {
 }
 
 void executor(node **n, w_index *i) {
-	assert(i->size >= 1);
+	if(i->size < 1)
+		return;
 	if(!strcmp(i->words[0], "ls")) {
 		printf("\033[32;01mVictor-Ayman@Linux-desktop:\033[00m"); pwd_in_line(n); printf("$ ");
 		print_index_in_line(i);	
