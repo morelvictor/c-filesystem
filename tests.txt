@@ -1,9 +1,7 @@
 mkdir Cours
-mkdir Tp
-mkdir Td
-touch notes.txt
-ls
 cd Cours
-mkdir Info
-cd Info
+mkdir Hello
+cd Hello
+cd ..
+cd
 pwd
