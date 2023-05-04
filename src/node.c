@@ -133,9 +133,16 @@ void rm(node **curr, w_index *i) {
 	assert(i->size >= 2);
 	node *n = pton(*curr, cons_path(i->words[1]));
 	if(n != NULL) {
-		printf("%d\n", is_child(n, *curr));
+		if(is_child(n, *curr)) {
+			l_remove(&n->father->children, n);
+			free_node(n);
+		} else {
+			puts("rm: dossier/fichier n'est pas un enfant de l'actuel");
+			exit(EXIT_FAILURE);
+		}
 	} else {
-		printf("NULL\n");
+		puts("rm: dossier/fichier inexistant");
+		exit(EXIT_FAILURE);
 	}
 }
 

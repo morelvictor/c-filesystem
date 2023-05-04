@@ -1,4 +1,5 @@
 mkdir Cours
 cd Cours
-rm /
-pwd
+mkdir Anglais Allemand Chinois
+rm Anglais
+ls
