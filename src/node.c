@@ -133,11 +133,12 @@ void rm(node **curr, w_index *i) {
 	assert(i->size >= 2);
 	node *n = pton(*curr, cons_path(i->words[1]));
 	if(n != NULL) {
-		if(is_child(n, *curr)) {
+		//if(is_child(n, *curr)) {
+		if(!is_child(*curr, n)) {
 			l_remove(&n->father->children, n);
 			free_node(n);
 		} else {
-			puts("rm: dossier/fichier n'est pas un enfant de l'actuel");
+			puts("rm: dossier/fichier est un parent de l'actuel");
 			exit(EXIT_FAILURE);
 		}
 	} else {
