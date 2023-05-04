@@ -116,15 +116,27 @@ void touch(node **curr, w_index *i) {
 	}
 }
 
+bool is_child(node *child, node *father) {
+	if(child == child->root)
+		return false;
+	if(father == child->root)
+		return true;
+	if(father == child->father)
+		return true;
+	if(father == child)
+		return false;
+	return is_child(child->father, father);
+}
+
 void rm(node **curr, w_index *i) {
+	// il faut que la cible soit un enfant de current
 	assert(i->size >= 2);
-	puts("Error: rm not implemented");
-	//exit(EXIT_FAILURE);
-	/* 
-	if(n->father != NULL) {
-		l_remove(&n->father->children, n);
+	node *n = pton(*curr, cons_path(i->words[1]));
+	if(n != NULL) {
+		printf("%d\n", is_child(n, *curr));
+	} else {
+		printf("NULL\n");
 	}
-	 * */
 }
 
 void cp(node **curr, w_index *i) {

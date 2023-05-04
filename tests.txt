@@ -1,7 +1,4 @@
 mkdir Cours
 cd Cours
-mkdir Hello
-cd Hello
-cd ..
-cd
+rm /
 pwd
