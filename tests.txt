@@ -1,7 +1,6 @@
 mkdir Cours
 cd Cours
-mkdir Hello
-cd Hello
-cd ..
-cd
+mkdir Anglais Allemand Chinois
+cd Anglais
+rm /Cours/
 pwd
