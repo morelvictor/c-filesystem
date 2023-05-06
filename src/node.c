@@ -159,8 +159,38 @@ void mv(node **curr, w_index *i) {
 	//exit(EXIT_FAILURE);
 }
 
+void p_aux_print(node_list *l) {
+	if(l == NULL) return;
+	printf("%s (%c) ", l->no->title, (l->no->is_folder ? 'D' : 'F'));
+	p_aux_print(l->succ);
+}
+
+void aux_print(node *);
+
+void rec_aux_print(node_list *l) {
+	if(l == NULL) return;
+	aux_print(l->no);
+	rec_aux_print(l->succ);
+}
+
+void aux_print(node *node) {
+	if(node == node->root) printf("/ ");
+	else printf("%s ", node->title);
+	printf("(%c), ", node->is_folder ? 'D' : 'F');
+	if(node->root != node) {
+		printf("pere: ");
+		if(node->father == node->root) printf("/ ");
+		else printf("%s ", node->father->title);
+		printf(", ");
+	}
+	printf("%zu fils : ", l_size(node->children));
+	p_aux_print(node->children);
+	printf("\n");
+
+	rec_aux_print(node->children);
+}
+
 void print(node **curr) {
-	puts("Error: print not implemented");
-	//exit(EXIT_FAILURE);
+	aux_print((*curr)->root);
 }
 

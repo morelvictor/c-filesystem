@@ -1,6 +1,9 @@
 mkdir Cours
+touch edt
 cd Cours
-mkdir Anglais Allemand Chinois
-cd Anglais
-rm /Cours/
-pwd
+mkdir ProjetC Anglais Td
+cd Td
+touch td1 td2
+mkdir CopieProjet
+cd /
+print
