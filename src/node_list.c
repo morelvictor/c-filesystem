@@ -1,5 +1,6 @@
 
 #include "node_list.h"
+#include "node.h"
 
 node_list *l_cons(node_list *succ, node *n) {
 	node_list *acc = malloc(sizeof(node));
@@ -81,3 +82,11 @@ void print_node_list(node_list *l) {
 	}
 }
 
+size_t size_aux(node_list *l, size_t acc) {
+	if(l == NULL) return acc;
+	return size_aux(l->succ, acc+1);
+}
+
+size_t l_size(node_list *l) {
+	return size_aux(l, 0);
+}
