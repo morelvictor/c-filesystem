@@ -171,7 +171,7 @@ void cp(node **curr, w_index *i) {
 	assert(i->size == 3);
 	node *origin = pton(*curr, cons_path(i->words[1]));
 	if(origin == NULL) {
-		printf("cp: le fichier/dossier à copier n'existe pas");
+		printf("cp: le fichier/dossier à copier n'existe pas\n");
 		exit(EXIT_FAILURE);
 	}
 	
@@ -179,19 +179,19 @@ void cp(node **curr, w_index *i) {
 	char *cpy_title = cpy_path->index->words[cpy_path->index->size - 1];
 	node *cpy_fath = pton(*curr, cons_papa(cpy_path));
 	if(cpy_fath == NULL) {
-		 printf("cp: dossier de destination inéxistant");
+		 printf("cp: dossier de destination inéxistant\n");
 		 exit(EXIT_FAILURE);
 	}
 	if(!cpy_fath->is_folder) {
-		printf("cp: le répertoire de destination n'est pas un dossier");
+		printf("cp: le répertoire de destination n'est pas un dossier\n");
 		exit(EXIT_FAILURE);
 	}
 	if(has_child(cpy_fath, cpy_title)) {
-		printf("cp: un fichier/dossier porte déjà le nom que vous voulez donner dans le répertoire de destination");
+		printf("cp: un fichier/dossier porte déjà le nom que vous voulez donner dans le répertoire de destination\n");
 		exit(EXIT_FAILURE);
 	}
 	if(is_child(cpy_fath, origin)) {
-		printf("cp: le fichier a copier est un parent du répertoire de destination");
+		printf("cp: le fichier a copier est un parent du répertoire de destination\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -205,8 +205,38 @@ void cp(node **curr, w_index *i) {
 
 void mv(node **curr, w_index *i) {
 	assert(i->size == 3);
-	puts("Error: mv not implemented");
-	//exit(EXIT_FAILURE);
+	node *origin = pton(*curr, cons_path(i->words[1]));
+	if(origin == NULL) {
+		printf("mv: le fichier/dossier à copier n'existe pas\n");
+		exit(EXIT_FAILURE);
+	}
+	
+	path *cpy_path = cons_path(i->words[2]);
+	char *cpy_title = cpy_path->index->words[cpy_path->index->size - 1];
+	node *cpy_fath = pton(*curr, cons_papa(cpy_path));
+	if(cpy_fath == NULL) {
+		 printf("mv: dossier de destination inéxistant\n");
+		 exit(EXIT_FAILURE);
+	}
+	if(!cpy_fath->is_folder) {
+		printf("mv: le répertoire de destination n'est pas un dossier\n");
+		exit(EXIT_FAILURE);
+	}
+	if(has_child(cpy_fath, cpy_title)) {
+		printf("mv: un fichier/dossier porte déjà le nom que vous voulez donner dans le répertoire de destination\n");
+		exit(EXIT_FAILURE);
+	}
+	if(is_child(cpy_fath, origin)) {
+		printf("mv: le fichier a copier est un parent du répertoire de destination\n");
+		exit(EXIT_FAILURE);
+	}
+
+	l_remove(&origin->father->children, origin);
+	cpy_fath->children = l_add(cpy_fath->children, origin);
+
+	free_path(cpy_path);
+
+
 }
 
 void p_aux_print(node_list *l) {
