@@ -1,9 +1,7 @@
-mkdir Cours
-touch edt
-cd Cours
-mkdir ProjetC Anglais Td
-cd Td
-touch td1 td2
-mkdir CopieProjet
-cd /
+mkdir Salut
+cd Salut
+touch a tous
+ls
+cd
+cp Salut Bonjour
 print

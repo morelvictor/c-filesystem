@@ -162,7 +162,6 @@ void copy_node(node *dest, node *origin) {
 	node_list *o = origin->children;
 	while(o != NULL) {
 		node *new = cons_node(o->no->is_folder, o->no->title, o->no->root, dest, NULL);
-		dest->children = l_add(dest->children, new);
 		copy_node(new, o->no);
 		o = o->succ;
 	}
