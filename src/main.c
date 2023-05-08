@@ -5,6 +5,7 @@
 #include "node.h"
 #include "parser.h"
 #include "path.h"
+#include "cst.h"
 
 #define MAX_CHAR 500
 
@@ -43,12 +44,13 @@ int main(int argc, char *argv[]) {
 		w_index *i = split_space(current_line);
 		executor(&current, i);
 		free_index(i);
+		if(get_fail()) break;
 	}
 
 	fclose(file);
 	free_node(current->root);
 	free(current_line);
-
+	if(get_fail()) return EXIT_FAILURE;
 	return EXIT_SUCCESS;
 }
 
@@ -92,6 +94,6 @@ void executor(node **n, w_index *i) {
 		print(n);
 	} else {
 		fprintf(stderr, "\nErreur: Commande inexistante %s\n", i->words[0]);
-		exit(EXIT_FAILURE);
+		failure();
 	}
 }
