@@ -199,6 +199,7 @@ void cp(node **curr, w_index *i) {
 	if(!origin->is_folder) cpy->is_folder = false;
 
 	copy_node(cpy, origin);
+	free_path(cpy_path);
 
 }
 
