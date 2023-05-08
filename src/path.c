@@ -32,3 +32,11 @@ path *cons_path(char *s) {
 	acc->index = split_slash(s);
 	return acc;
 }
+
+path *cons_papa(path *p) {
+  w_index *i = sub_index(p->index, 0, p->index->size-1);
+  path *acc = malloc(sizeof(path));
+  acc->index = i;
+  acc->type = p->type;
+  return acc;
+}

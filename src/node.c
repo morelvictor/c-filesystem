@@ -147,10 +147,60 @@ void rm(node **curr, w_index *i) {
 	}
 }
 
+bool aux_h_c(node_list *l, char *s) {
+	if(l == NULL) return false;
+	if(!strcmp(l->no->title, s)) return true;
+	return aux_h_c(l->succ, s);
+}
+
+bool has_child(node *n, char *s) {
+	return aux_h_c(n->children, s);
+}
+
+// Copie les enfants et les enfants des enfants etc...
+void copy_node(node *dest, node *origin) {
+	node_list *o = origin->children;
+	while(o != NULL) {
+		node *new = cons_node(o->no->is_folder, o->no->title, o->no->root, dest, NULL);
+		copy_node(new, o->no);
+		o = o->succ;
+	}
+}
+
 void cp(node **curr, w_index *i) {
 	assert(i->size == 3);
-	puts("Error: cp not implemented");
-	//exit(EXIT_FAILURE);
+	node *origin = pton(*curr, cons_path(i->words[1]));
+	if(origin == NULL) {
+		printf("cp: le fichier/dossier à copier n'existe pas");
+		exit(EXIT_FAILURE);
+	}
+	
+	path *cpy_path = cons_path(i->words[2]);
+	char *cpy_title = cpy_path->index->words[cpy_path->index->size - 1];
+	node *cpy_fath = pton(*curr, cons_papa(cpy_path));
+	if(cpy_fath == NULL) {
+		 printf("cp: dossier de destination inéxistant");
+		 exit(EXIT_FAILURE);
+	}
+	if(!cpy_fath->is_folder) {
+		printf("cp: le répertoire de destination n'est pas un dossier");
+		exit(EXIT_FAILURE);
+	}
+	if(has_child(cpy_fath, cpy_title)) {
+		printf("cp: un fichier/dossier porte déjà le nom que vous voulez donner dans le répertoire de destination");
+		exit(EXIT_FAILURE);
+	}
+	if(is_child(cpy_fath, origin)) {
+		printf("cp: le fichier a copier est un parent du répertoire de destination");
+		exit(EXIT_FAILURE);
+	}
+
+	node* cpy = cons_node(true, cpy_title, (*curr)->root, cpy_fath, NULL);
+	if(!origin->is_folder) cpy->is_folder = false;
+
+	copy_node(cpy, origin);
+	free_path(cpy_path);
+
 }
 
 void mv(node **curr, w_index *i) {

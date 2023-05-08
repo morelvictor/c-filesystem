@@ -20,5 +20,6 @@ extern void free_path(path *);
  */
 extern node *pton(node *, path *);
 extern path *cons_path(char *);
+extern path *cons_papa(path *);
 
 #endif
