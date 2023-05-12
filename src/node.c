@@ -5,6 +5,7 @@
 #include <string.h>
 #include <assert.h>
 #include "path.h"
+#include "cst.h"
 
 void free_node(node *n) {
 	/*
@@ -24,7 +25,7 @@ node *cons_node(bool is_folder, char *title, node *root, node *father, node_list
 	node *acc = malloc(sizeof(node));
 	if(acc == NULL) {
 		fprintf(stderr, "\nErreur: Impossible d'allouer la memoire pour créer un noeud");
-		exit(EXIT_FAILURE);
+		failure();
 	}
 	acc->is_folder = is_folder;
 	acc->root = root;
@@ -76,7 +77,7 @@ void cd(node **curr, w_index *i) {
 			*curr = acc;
 		} else {
 			puts("Cd: repertoire inexistant");
-			exit(EXIT_FAILURE);
+			failure();
 		}
 	}
 }
@@ -139,11 +140,11 @@ void rm(node **curr, w_index *i) {
 			free_node(n);
 		} else {
 			puts("rm: dossier/fichier est un parent de l'actuel");
-			exit(EXIT_FAILURE);
+		failure();
 		}
 	} else {
 		puts("rm: dossier/fichier inexistant");
-		exit(EXIT_FAILURE);
+		failure();
 	}
 }
 
@@ -172,7 +173,7 @@ void cp(node **curr, w_index *i) {
 	node *origin = pton(*curr, cons_path(i->words[1]));
 	if(origin == NULL) {
 		printf("cp: le fichier/dossier à copier n'existe pas\n");
-		exit(EXIT_FAILURE);
+		failure();
 	}
 	
 	path *cpy_path = cons_path(i->words[2]);
@@ -180,27 +181,24 @@ void cp(node **curr, w_index *i) {
 	node *cpy_fath = pton(*curr, cons_papa(cpy_path));
 	if(cpy_fath == NULL) {
 		 printf("cp: dossier de destination inéxistant\n");
-		 exit(EXIT_FAILURE);
-	}
-	if(!cpy_fath->is_folder) {
+		failure();
+	} else if(!cpy_fath->is_folder) {
 		printf("cp: le répertoire de destination n'est pas un dossier\n");
-		exit(EXIT_FAILURE);
-	}
-	if(has_child(cpy_fath, cpy_title)) {
+		failure();
+	} else if(has_child(cpy_fath, cpy_title)) {
 		printf("cp: un fichier/dossier porte déjà le nom que vous voulez donner dans le répertoire de destination\n");
-		exit(EXIT_FAILURE);
-	}
-	if(is_child(cpy_fath, origin)) {
+		failure();
+	} else if(is_child(cpy_fath, origin)) {
 		printf("cp: le fichier a copier est un parent du répertoire de destination\n");
-		exit(EXIT_FAILURE);
+		failure();
+	} else {
+		node* cpy = cons_node(true, cpy_title, (*curr)->root, cpy_fath, NULL);
+		if(!origin->is_folder) cpy->is_folder = false;
+	
+		copy_node(cpy, origin);
 	}
-
-	node* cpy = cons_node(true, cpy_title, (*curr)->root, cpy_fath, NULL);
-	if(!origin->is_folder) cpy->is_folder = false;
-
-	copy_node(cpy, origin);
+	
 	free_path(cpy_path);
-
 }
 
 void mv(node **curr, w_index *i) {
@@ -208,35 +206,30 @@ void mv(node **curr, w_index *i) {
 	node *origin = pton(*curr, cons_path(i->words[1]));
 	if(origin == NULL) {
 		printf("mv: le fichier/dossier à copier n'existe pas\n");
-		exit(EXIT_FAILURE);
+		failure();
 	}
 	
 	path *cpy_path = cons_path(i->words[2]);
 	char *cpy_title = cpy_path->index->words[cpy_path->index->size - 1];
 	node *cpy_fath = pton(*curr, cons_papa(cpy_path));
 	if(cpy_fath == NULL) {
-		 printf("mv: dossier de destination inéxistant\n");
-		 exit(EXIT_FAILURE);
-	}
-	if(!cpy_fath->is_folder) {
+		printf("mv: dossier de destination inéxistant\n");
+		failure();
+	} else if(!cpy_fath->is_folder) {
 		printf("mv: le répertoire de destination n'est pas un dossier\n");
-		exit(EXIT_FAILURE);
-	}
-	if(has_child(cpy_fath, cpy_title)) {
+		failure();
+	} else if(has_child(cpy_fath, cpy_title)) {
 		printf("mv: un fichier/dossier porte déjà le nom que vous voulez donner dans le répertoire de destination\n");
-		exit(EXIT_FAILURE);
-	}
-	if(is_child(cpy_fath, origin)) {
+		failure();
+	} else if(is_child(cpy_fath, origin)) {
 		printf("mv: le fichier a copier est un parent du répertoire de destination\n");
-		exit(EXIT_FAILURE);
+		failure();
+	} else {
+		l_remove(&origin->father->children, origin);
+		cpy_fath->children = l_add(cpy_fath->children, origin);
 	}
-
-	l_remove(&origin->father->children, origin);
-	cpy_fath->children = l_add(cpy_fath->children, origin);
 
 	free_path(cpy_path);
-
-
 }
 
 void p_aux_print(node_list *l) {
