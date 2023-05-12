@@ -44,7 +44,9 @@ int main(int argc, char *argv[]) {
 		w_index *i = split_space(current_line);
 		executor(&current, i);
 		free_index(i);
-		if(get_fail()) break;
+		if(get_fail()) { 
+			break;
+		}
 	}
 
 	fclose(file);

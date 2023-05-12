@@ -182,26 +182,23 @@ void cp(node **curr, w_index *i) {
 	if(cpy_fath == NULL) {
 		 printf("cp: dossier de destination inéxistant\n");
 		failure();
-	}
-	if(!cpy_fath->is_folder) {
+	} else if(!cpy_fath->is_folder) {
 		printf("cp: le répertoire de destination n'est pas un dossier\n");
 		failure();
-	}
-	if(has_child(cpy_fath, cpy_title)) {
+	} else if(has_child(cpy_fath, cpy_title)) {
 		printf("cp: un fichier/dossier porte déjà le nom que vous voulez donner dans le répertoire de destination\n");
 		failure();
-	}
-	if(is_child(cpy_fath, origin)) {
+	} else if(is_child(cpy_fath, origin)) {
 		printf("cp: le fichier a copier est un parent du répertoire de destination\n");
 		failure();
+	} else {
+		node* cpy = cons_node(true, cpy_title, (*curr)->root, cpy_fath, NULL);
+		if(!origin->is_folder) cpy->is_folder = false;
+	
+		copy_node(cpy, origin);
 	}
-
-	node* cpy = cons_node(true, cpy_title, (*curr)->root, cpy_fath, NULL);
-	if(!origin->is_folder) cpy->is_folder = false;
-
-	copy_node(cpy, origin);
+	
 	free_path(cpy_path);
-
 }
 
 void mv(node **curr, w_index *i) {
@@ -218,26 +215,21 @@ void mv(node **curr, w_index *i) {
 	if(cpy_fath == NULL) {
 		printf("mv: dossier de destination inéxistant\n");
 		failure();
-	}
-	if(!cpy_fath->is_folder) {
+	} else if(!cpy_fath->is_folder) {
 		printf("mv: le répertoire de destination n'est pas un dossier\n");
 		failure();
-	}
-	if(has_child(cpy_fath, cpy_title)) {
+	} else if(has_child(cpy_fath, cpy_title)) {
 		printf("mv: un fichier/dossier porte déjà le nom que vous voulez donner dans le répertoire de destination\n");
 		failure();
-	}
-	if(is_child(cpy_fath, origin)) {
+	} else if(is_child(cpy_fath, origin)) {
 		printf("mv: le fichier a copier est un parent du répertoire de destination\n");
 		failure();
+	} else {
+		l_remove(&origin->father->children, origin);
+		cpy_fath->children = l_add(cpy_fath->children, origin);
 	}
 
-	l_remove(&origin->father->children, origin);
-	cpy_fath->children = l_add(cpy_fath->children, origin);
-
 	free_path(cpy_path);
-
-
 }
 
 void p_aux_print(node_list *l) {
