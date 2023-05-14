@@ -1,6 +1,4 @@
-
 #include "node_list.h"
-#include "node.h"
 
 node_list *l_cons(node_list *succ, node *n) {
 	node_list *acc = malloc(sizeof(node));

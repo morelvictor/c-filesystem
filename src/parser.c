@@ -1,10 +1,4 @@
-
 #include "parser.h"
-#include <stdio.h>
-#include <ctype.h>
-#include <stdbool.h>
-#include <assert.h>
-#include <string.h>
 
 void free_index(w_index *pi) {
 	for(size_t i = 0; i < pi->size; ++i) {

@@ -1,12 +1,5 @@
 #include "node.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <assert.h>
-#include "path.h"
-#include "cst.h"
-
 void free_node(node *n) {
 	/*
 	 * On enleve le node a liberer de la liste des enfant de son pere
