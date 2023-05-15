@@ -29,5 +29,5 @@ Nous avons décidé d'ajouter quelques fonctionnalités pour nous rapprocher le 
 - Nous avons autorisé l'utilisation du chemin "/" ainsi que l'utilisation de ".." en plein milieu d'un chemin
 - Nous avons ajoutés un joli prompt comme si on était dans un véritable terminal
 - La commande `ls` affiche d'un certaine couleur les fichiers et d'une autre les dossiers
-- En cas d'erreur, aucune plus aucune commande n'est executée, la mémoire est vidée et un message d'erreur est imprimé dans `stderr` et un code erreur est retourné par le programme (voir `debug.h` pour les codes erreurs)
+- En cas d'erreur, plus aucune commande n'est executée, la mémoire est vidée et un message d'erreur est imprimé dans `stderr` et un code erreur est retourné par le programme (voir `debug.h` pour les codes erreurs)
 
