@@ -7,7 +7,7 @@
 #include <string.h>
 #include <assert.h>
 #include "path.h"
-#include "cst.h"
+#include "debug.h"
 #include "parser.h"
 #include "node_list.h"
 

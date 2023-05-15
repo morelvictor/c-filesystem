@@ -5,7 +5,7 @@
 #include "node.h"
 #include "parser.h"
 #include "path.h"
-#include "cst.h"
+#include "debug.h"
 
 #define MAX_CHAR 500
 
@@ -20,8 +20,8 @@ int main(int argc, char *argv[]) {
 	 * On assigne sa valeur a file et si il y a une erreur de lecture on la signale et on arrete le programme
 	 **/
 	if((file = fopen(argv[1], "r")) == NULL) {
-		fprintf(stderr, "\nErreur: Impossible de lire le fichier %s\n", argv[1]);
-		return(EXIT_FAILURE);
+		err_read_file();
+		return(get_fail());
 	}
 
 	char *current_line = malloc(MAX_CHAR * sizeof(char));
@@ -52,8 +52,7 @@ int main(int argc, char *argv[]) {
 	fclose(file);
 	free_node(current->root);
 	free(current_line);
-	if(get_fail()) return EXIT_FAILURE;
-	return EXIT_SUCCESS;
+	return get_fail();
 }
 
 void executor(node **n, w_index *i) {
@@ -96,7 +95,6 @@ void executor(node **n, w_index *i) {
 		print_index_in_line(i);
 		print(n);
 	} else {
-		fprintf(stderr, "\nErreur: Commande inexistante %s\n", i->words[0]);
-		failure();
+		err_inval_cmd();
 	}
 }
