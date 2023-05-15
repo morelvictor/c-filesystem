@@ -4,13 +4,16 @@
 #include "parser.h"
 #include "node.h"
 
+#include <assert.h>
+#include "parser.h"
+
 struct path {
 	enum { ABS, REL } type;
 	w_index *index;
 };
 
 typedef struct path path;
-
+typedef struct node node;
 
 extern void free_path(path *);
 

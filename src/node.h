@@ -1,9 +1,15 @@
 #ifndef NODE_H
 #define NODE_H
 
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+#include "path.h"
+#include "debug.h"
 #include "parser.h"
 #include "node_list.h"
-#include <stdbool.h>
 
 #define MAX_TITLE_LENGH 100
 

@@ -1,9 +1,4 @@
-
 #include "path.h"
-
-#include <assert.h>
-#include "parser.h"
-
 
 void free_path(path *p) {
 	free_index(p->index);
