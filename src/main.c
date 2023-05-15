@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
 	 * On crée le noeud racine
 	 * et on attribue sa racine et son papa
 	 **/
-	node *current = cons_node(true, "root", NULL, NULL, NULL);
+	node *current = cons_node(true, "", NULL, NULL, NULL);
 	current->root = current;
 	current->father = current;
 
