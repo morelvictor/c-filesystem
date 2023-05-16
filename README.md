@@ -22,7 +22,7 @@ Vous devez avoir l'utilitaire `make` ainsi que `gcc`
 #### Limitations
 - Une ligne fait au maximum 500 caractères
 
-#### Ajouts
+#### Ajouts (Ce ne sont pas des bugs)
 Nous avons décidé d'ajouter quelques fonctionnalités pour nous rapprocher le plus possible du comportement d'un vrai terminal. Elles sont listées ci-dessous:
 
 - Les commandes `touch` et `mkdir` n'ont pas de limite d'arguments, par exemple la commande `mkdir bonjour a tous` créera trois dossier, "bonjour", "a", "tous".
