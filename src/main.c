@@ -58,42 +58,70 @@ int main(int argc, char *argv[]) {
 void executor(node **n, w_index *i) {
 	if(i->size == 0)
 		return;
+	printf("\033[32;01mVictor-Ayman@Linux-desktop:\033[00m"); pwd_in_line(n); printf("$ ");
 	if(!strcmp(i->words[0], "ls")) {
-		printf("\033[32;01mVictor-Ayman@Linux-desktop:\033[00m"); pwd_in_line(n); printf("$ ");
 		print_index_in_line(i);
-		ls(n);
+		if(i->size == 1) {
+			ls(n);
+		} else {
+			err_arg_err();
+		}
 	} else if(!strcmp(i->words[0], "cd")) {
-		printf("\033[32;01mVictor-Ayman@Linux-desktop:\033[00m"); pwd_in_line(n); printf("$ ");
 		print_index_in_line(i);
-		cd(n, i);
+		if(i->size <= 2) {
+			cd(n, i);
+		} else {
+			err_arg_err();
+		}
 	} else if(!strcmp(i->words[0], "pwd")) {
-		printf("\033[32;01mVictor-Ayman@Linux-desktop:\033[00m"); pwd_in_line(n); printf("$ ");
 		print_index_in_line(i);
-		pwd(n);
+		if(i->size == 1) {
+			pwd(n);
+		} else {
+			err_arg_err();
+		}
 	} else if(!strcmp(i->words[0], "mkdir")) {
-		printf("\033[32;01mVictor-Ayman@Linux-desktop:\033[00m"); pwd_in_line(n); printf("$ ");
 		print_index_in_line(i);
-		mkdir(n, i);
+		if(i->size >= 2) {
+			mkdir(n, i);
+		} else {
+			err_arg_err();
+		}
 	} else if(!strcmp(i->words[0], "touch")) {
-		printf("\033[32;01mVictor-Ayman@Linux-desktop:\033[00m"); pwd_in_line(n); printf("$ ");
 		print_index_in_line(i);
-		touch(n, i);
+		if(i->size >= 2) {
+			touch(n, i);
+		} else {
+			err_arg_err();
+		}
 	} else if(!strcmp(i->words[0], "rm")) {
-		printf("\033[32;01mVictor-Ayman@Linux-desktop:\033[00m"); pwd_in_line(n); printf("$ ");
 		print_index_in_line(i);
-		rm(n, i);
+		if(i->size == 2) {
+			rm(n, i);
+		} else {
+			err_arg_err();
+		}
 	} else if(!strcmp(i->words[0], "cp")) {
-		printf("\033[32;01mVictor-Ayman@Linux-desktop:\033[00m"); pwd_in_line(n); printf("$ ");
 		print_index_in_line(i);
-		cp(n, i);
+		if(i->size == 3) {
+			cp(n, i);
+		} else {
+			err_arg_err();
+		}
 	} else if(!strcmp(i->words[0], "mv")) {
-		printf("\033[32;01mVictor-Ayman@Linux-desktop:\033[00m"); pwd_in_line(n); printf("$ ");
 		print_index_in_line(i);
-		mv(n, i);
+		if(i->size == 3) {
+			mv(n, i);
+		} else {
+			err_arg_err();
+		}
 	} else if(!strcmp(i->words[0], "print")) {
-		printf("\033[32;01mVictor-Ayman@Linux-desktop:\033[00m"); pwd_in_line(n); printf("$ ");
 		print_index_in_line(i);
-		print(n);
+		if(i->size == 1) {
+			print(n);
+		} else {
+			err_arg_err();
+		}
 	} else {
 		err_inval_cmd();
 	}

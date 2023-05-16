@@ -39,6 +39,10 @@ void err_par_dest() {
 	failure(PAR_DEST, "La cible est un parent de la destination, c'est un problème");
 }
 
+void err_arg_err() {
+	failure (ARG_ERR, "Mauvais nombre d'arguments dans la commande");
+}
+
 int get_fail() {
 	return fail;
 }

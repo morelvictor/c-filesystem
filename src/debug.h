@@ -9,6 +9,7 @@
 #define INVAL_TYPE 6
 #define ALREADY_EX 7
 #define PAR_DEST   8
+#define ARG_ERR    9
 
 #include <stdio.h>
 #include "parser.h"
@@ -23,6 +24,7 @@ extern void err_par_act();
 extern void err_inval_type();
 extern void err_already_exist();
 extern void err_par_dest();
+extern void err_arg_err();
 extern int get_fail();
 
 #endif
