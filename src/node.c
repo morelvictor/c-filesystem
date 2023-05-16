@@ -147,7 +147,6 @@ void touch(node **curr, w_index *i) {
 
 void rm(node **curr, w_index *i) {
 	// il faut que la cible soit un enfant de current
-	assert(i->size >= 2);
 	node *n = pton(*curr, cons_path(i->words[1]));
 	if(n != NULL) {
 		//if(is_child(n, *curr)) {
