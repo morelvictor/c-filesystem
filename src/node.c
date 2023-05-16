@@ -67,7 +67,11 @@ void cd(node **curr, w_index *i) {
 	} else {
 		node *acc = pton(*curr, cons_path(i->words[1]));
 		if(acc != NULL) {
-			*curr = acc;
+			if(acc->is_folder) {
+				*curr = acc;
+			} else {
+				err_inval_type();
+			}
 		} else {
 			err_no_dest();
 		}
@@ -95,19 +99,6 @@ void pwd_in_line(node **curr) {
     }
 }
 
-void mkdir(node **curr, w_index *i) {
-	assert(i->size >= 2);
-	for(int x = 1; x < i->size; ++x) {
-		cons_node(true, i->words[x], (*curr)->root, (*curr), NULL);
-	}
-}
-
-void touch(node **curr, w_index *i) {
-	assert(i->size >= 2);
-	for(int x = 1; x < i->size; ++x) {
-		cons_node(false, i->words[x], (*curr)->root, (*curr), NULL);
-	}
-}
 
 bool is_child(node *child, node *father) {
 	if(child == child->root)
@@ -119,6 +110,39 @@ bool is_child(node *child, node *father) {
 	if(father == child)
 		return false;
 	return is_child(child->father, father);
+}
+
+bool aux_h_c(node_list *l, char *s) {
+	if(l == NULL) return false;
+	if(!strcmp(l->no->title, s)) return true;
+	return aux_h_c(l->succ, s);
+}
+
+bool has_child(node *n, char *s) {
+	return aux_h_c(n->children, s);
+}
+
+
+void mkdir(node **curr, w_index *i) {
+	assert(i->size >= 2);
+	for(int x = 1; x < i->size; ++x) {
+		if(has_child(*curr, i->words[x])) {
+			err_already_exist();
+			break;
+		}
+		cons_node(true, i->words[x], (*curr)->root, (*curr), NULL);
+	}
+}
+
+void touch(node **curr, w_index *i) {
+	assert(i->size >= 2);
+	for(int x = 1; x < i->size; ++x) {
+		if(has_child(*curr, i->words[x])) {
+			err_already_exist();
+			break;
+		}
+		cons_node(false, i->words[x], (*curr)->root, (*curr), NULL);
+	}
 }
 
 void rm(node **curr, w_index *i) {
@@ -136,16 +160,6 @@ void rm(node **curr, w_index *i) {
 	} else {
 		err_no_dest();
 	}
-}
-
-bool aux_h_c(node_list *l, char *s) {
-	if(l == NULL) return false;
-	if(!strcmp(l->no->title, s)) return true;
-	return aux_h_c(l->succ, s);
-}
-
-bool has_child(node *n, char *s) {
-	return aux_h_c(n->children, s);
 }
 
 // Copie les enfants et les enfants des enfants etc...
