@@ -28,6 +28,6 @@ Nous avons décidé d'ajouter quelques fonctionnalités pour nous rapprocher le 
 - Les commandes `touch` et `mkdir` n'ont pas de limite d'arguments, par exemple la commande `mkdir bonjour a tous` créera trois dossier, "bonjour", "a", "tous".
 - Nous avons autorisé l'utilisation du chemin "/" ainsi que l'utilisation de ".." en plein milieu d'un chemin
 - Nous avons ajoutés un joli prompt comme si on était dans un véritable terminal
-- La commande `ls` affiche d'un certaine couleur les fichiers et d'une autre les dossiers
+- La commande `ls` affiche d'une certaine couleur les fichiers et d'une autre les dossiers
 - En cas d'erreur, plus aucune commande n'est executée, la mémoire est vidée, un message d'erreur est imprimé dans `stderr` et un code erreur est retourné par le programme (voir `debug.h` pour les codes erreurs)
 
