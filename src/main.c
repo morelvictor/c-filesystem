@@ -68,7 +68,7 @@ void executor(node **n, w_index *i) {
 		}
 	} else if(!strcmp(i->words[0], "cd")) {
 		print_index_in_line(i);
-		if(i->size == 1) {
+		if(i->size <= 2) {
 			cd(n, i);
 		} else {
 			err_arg_err();
@@ -82,26 +82,46 @@ void executor(node **n, w_index *i) {
 		}
 	} else if(!strcmp(i->words[0], "mkdir")) {
 		print_index_in_line(i);
-		mkdir(n, i);
+		if(i->size >= 2) {
+			mkdir(n, i);
+		} else {
+			err_arg_err();
+		}
 	} else if(!strcmp(i->words[0], "touch")) {
 		print_index_in_line(i);
-		touch(n, i);
+		if(i->size >= 2) {
+			touch(n, i);
+		} else {
+			err_arg_err();
+		}
 	} else if(!strcmp(i->words[0], "rm")) {
 		print_index_in_line(i);
-		if(i->size == 1) {
+		if(i->size == 2) {
 			rm(n, i);
 		} else {
 			err_arg_err();
 		}
 	} else if(!strcmp(i->words[0], "cp")) {
 		print_index_in_line(i);
-		cp(n, i);
+		if(i->size == 3) {
+			cp(n, i);
+		} else {
+			err_arg_err();
+		}
 	} else if(!strcmp(i->words[0], "mv")) {
 		print_index_in_line(i);
-		mv(n, i);
+		if(i->size == 3) {
+			mv(n, i);
+		} else {
+			err_arg_err();
+		}
 	} else if(!strcmp(i->words[0], "print")) {
 		print_index_in_line(i);
-		print(n);
+		if(i->size == 1) {
+			print(n);
+		} else {
+			err_arg_err();
+		}
 	} else {
 		err_inval_cmd();
 	}

@@ -40,7 +40,7 @@ void err_par_dest() {
 }
 
 void err_arg_err() {
-	failure (ARG_ERR, "Trop d'arguments dans la commande");
+	failure (ARG_ERR, "Mauvais nombre d'arguments dans la commande");
 }
 
 int get_fail() {
