@@ -6,10 +6,9 @@
 #include "parser.h"
 #include "path.h"
 #include "debug.h"
+#include "exec.h"
 
 #define MAX_CHAR 500
-
-void executor(node **, w_index *);
 
 int main(int argc, char *argv[]) {
 
@@ -55,74 +54,4 @@ int main(int argc, char *argv[]) {
 	return get_fail();
 }
 
-void executor(node **n, w_index *i) {
-	if(i->size == 0)
-		return;
-	printf("\033[32;01mVictor-Ayman@Linux-desktop:\033[00m"); pwd_in_line(n); printf("$ ");
-	if(!strcmp(i->words[0], "ls")) {
-		print_index_in_line(i);
-		if(i->size == 1) {
-			ls(n);
-		} else {
-			err_arg_err();
-		}
-	} else if(!strcmp(i->words[0], "cd")) {
-		print_index_in_line(i);
-		if(i->size <= 2) {
-			cd(n, i);
-		} else {
-			err_arg_err();
-		}
-	} else if(!strcmp(i->words[0], "pwd")) {
-		print_index_in_line(i);
-		if(i->size == 1) {
-			pwd(n);
-		} else {
-			err_arg_err();
-		}
-	} else if(!strcmp(i->words[0], "mkdir")) {
-		print_index_in_line(i);
-		if(i->size >= 2) {
-			mkdir(n, i);
-		} else {
-			err_arg_err();
-		}
-	} else if(!strcmp(i->words[0], "touch")) {
-		print_index_in_line(i);
-		if(i->size >= 2) {
-			touch(n, i);
-		} else {
-			err_arg_err();
-		}
-	} else if(!strcmp(i->words[0], "rm")) {
-		print_index_in_line(i);
-		if(i->size == 2) {
-			rm(n, i);
-		} else {
-			err_arg_err();
-		}
-	} else if(!strcmp(i->words[0], "cp")) {
-		print_index_in_line(i);
-		if(i->size == 3) {
-			cp(n, i);
-		} else {
-			err_arg_err();
-		}
-	} else if(!strcmp(i->words[0], "mv")) {
-		print_index_in_line(i);
-		if(i->size == 3) {
-			mv(n, i);
-		} else {
-			err_arg_err();
-		}
-	} else if(!strcmp(i->words[0], "print")) {
-		print_index_in_line(i);
-		if(i->size == 1) {
-			print(n);
-		} else {
-			err_arg_err();
-		}
-	} else {
-		err_inval_cmd();
-	}
-}
+
