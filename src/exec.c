@@ -158,6 +158,9 @@ void print(node **curr) {
 void executor(node **n, w_index *i) {
 	if(i->size == 0)
 		return;
+	if(!strcmp(i->words[0], "//")) {
+		return;
+	}
 	printf("\033[32;01mVictor-Ayman@Linux-desktop:\033[00m"); pwd_in_line(n); printf("$ ");
 	if(!strcmp(i->words[0], "ls")) {
 		print_index_in_line(i);
