@@ -15,46 +15,46 @@ void free_node_list(node_list *l) {
 	}
 }
 
-node *pop(node_list ** head) {
-    node *retval = NULL;
-    node_list * next_node = NULL;
+node *pop(node_list **head) {
+	node *retval = NULL;
+	node_list * next_node = NULL;
 
-    if (*head == NULL) {
-        return NULL;
-    }
+	if (*head == NULL) {
+		return NULL;
+	}
 
-    next_node = (*head)->succ;
-    retval = (*head)->no;
-    free(*head);
-    *head = next_node;
+	next_node = (*head)->succ;
+	retval = (*head)->no;
+	free(*head);
+	*head = next_node;
 
-    return retval;
+	return retval;
 }
 
-node *l_remove(node_list ** head, node *val) {
-    node_list *previous, *current;
+node *l_remove(node_list **head, node *val) {
+	node_list *previous, *current;
 
-    if (*head == NULL) {
-        return NULL;
-    }
+	if (*head == NULL) {
+		return NULL;
+	}
 
-    if ((*head)->no == val) {
-        return pop(head);
-    }
+	if ((*head)->no == val) {
+		return pop(head);
+	}
 
-    previous = *head;
-    current = (*head)->succ;
-    while (current) {
-        if (current->no == val) {
-            previous->succ = current->succ;
-            free(current);
-            return val;
-        }
+	previous = *head;
+	current = (*head)->succ;
+	while (current) {
+		if (current->no == val) {
+			previous->succ = current->succ;
+			free(current);
+			return val;
+		}
 
-        previous = current;
-        current  = current->succ;
-    }
-    return NULL;
+		previous = current;
+		current  = current->succ;
+	}
+	return NULL;
 }
 
 node_list *l_add(node_list *l, node *n) {
