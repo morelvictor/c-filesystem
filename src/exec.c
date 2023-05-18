@@ -133,6 +133,11 @@ void mv(node **curr, w_index *i) {
 		return;
 	}
 	
+	if(origin == (*curr)->root) {
+		err_edit_root();
+		return;
+	}
+	
 	path *cpy_path = cons_path(i->words[2]);
 	char *cpy_title = cpy_path->index->words[cpy_path->index->size - 1];
 	node *cpy_fath = pton(*curr, cons_papa(cpy_path));
