@@ -14,6 +14,16 @@ void free_node(node *n) {
 	free(n);
 }
 
+void set_title(node *no, char *title) {
+	size_t c = 0;
+	while(c < 99 && title[c] != '\0') {
+		no->title[c] = title[c];
+		++c;
+	}
+	no->title[c] = '\0';
+}
+
+
 node *cons_node(bool is_folder, char *title, node *root, node *father, node_list *children) {
 	node *acc = malloc(sizeof(node));
 	if(acc == NULL) {
@@ -29,18 +39,10 @@ node *cons_node(bool is_folder, char *title, node *root, node *father, node_list
 	}
 	acc->children = children;
 
-
-	size_t c = 0;
-	while(c < 99 && title[c] != '\0') {
-		acc->title[c] = title[c];
-		++c;
-	}
-	acc->title[c] = '\0';
-
+	set_title(acc, title);
+	
 	return acc;
 }
-
-
 
 
 

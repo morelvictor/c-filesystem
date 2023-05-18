@@ -28,6 +28,7 @@ typedef struct node_list node_list;
 
 extern void free_node(node *);
 
+extern void set_title(node *, char *);
 extern node *cons_node(bool, char *, node *, node *, node_list *);
 extern bool is_child(node *, node *);
 extern bool has_child(node *, char *);
