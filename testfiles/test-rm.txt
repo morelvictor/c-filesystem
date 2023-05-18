@@ -1,0 +1,12 @@
+mkdir Licence
+cd Licence
+mkdir L1 L2
+cd L1
+mkdir Algebre Analyse Java CI2 PFW
+cd Algebre
+touch cours
+cd ..
+rm Java
+rm CI2
+cd PFW
+rm ../PFW

@@ -1,0 +1,12 @@
+mkdir bonjour a tous
+touch ficher incroyable
+ls
+cd bonjour
+cd /
+cd ..
+cd a/..
+cd tous/../bonjour
+pwd
+touch fichier
+print
+cd fichier
