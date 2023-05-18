@@ -40,7 +40,11 @@ void err_par_dest() {
 }
 
 void err_arg_err() {
-	failure (ARG_ERR, "Mauvais nombre d'arguments dans la commande");
+	failure(ARG_ERR, "Mauvais nombre d'arguments dans la commande");
+}
+
+void err_edit_root() {
+	failure(EDIT_ROOT, "Vous essayez de modifier la racine, c'est très grave");
 }
 
 int get_fail() {
