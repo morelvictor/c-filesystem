@@ -143,7 +143,7 @@ void mv(node **curr, w_index *i) {
 	} else if(is_child(cpy_fath, origin)) {
 		err_par_dest();
 	} else {
-		set_title(origin, cpy_path->index->words[cpy_path->index->size-1]);
+		set_title(origin, cpy_title);
 		l_remove(&origin->father->children, origin);
 		cpy_fath->children = l_add(cpy_fath->children, origin);
 	}
