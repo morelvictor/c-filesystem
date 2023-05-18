@@ -103,6 +103,7 @@ void cp(node **curr, w_index *i) {
 	node *origin = pton(*curr, cons_path(i->words[1]));
 	if(origin == NULL) {
 		err_no_dest();
+		return;
 	}
 	
 	path *cpy_path = cons_path(i->words[2]);
@@ -129,6 +130,7 @@ void mv(node **curr, w_index *i) {
 	node *origin = pton(*curr, cons_path(i->words[1]));
 	if(origin == NULL) {
 		err_no_dest();
+		return;
 	}
 	
 	path *cpy_path = cons_path(i->words[2]);
