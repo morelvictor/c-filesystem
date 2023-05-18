@@ -12,10 +12,13 @@ node *pton(node *curr, path *p) {
 		now = curr->root;
 	}
 	for(int i = 0; i < p->index->size; ++i) {
-		if(!strcmp(p->index->words[i], ".."))
+		if(!strcmp(p->index->words[i], "..")) {
 			now = now->father;
-		else if((now = get_node(now->children, p->index->words[i])) == NULL)
-			return NULL;
+		}
+		else if((now = get_node(now->children, p->index->words[i])) == NULL) {
+			now = NULL;
+			break;
+		}
 	}
 	free_path(p);
 	return now;
