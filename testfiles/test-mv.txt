@@ -8,3 +8,4 @@ cd
 print
 mv R1 Rmv
 print
+mv / laracine
