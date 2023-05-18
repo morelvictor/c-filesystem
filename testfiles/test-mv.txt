@@ -1,0 +1,10 @@
+mkdir R1
+cd R1
+touch fic11 fic12
+mkdir R2
+cd R2
+touch fic21
+cd
+print
+mv R1 Rmv
+print
