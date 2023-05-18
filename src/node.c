@@ -52,7 +52,7 @@ bool is_child(node *child, node *father) {
 	if(father == child->father)
 		return true;
 	if(father == child)
-		return false;
+		return true;
 	return is_child(child->father, father);
 }
 
