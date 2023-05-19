@@ -34,6 +34,8 @@ extern bool is_child(node *, node *);
 extern bool has_child(node *, char *);
 extern void copy_node(node *, node *);
 extern void print_node(node *);
+extern void print_aux(node_list *, int);
+void print(node *, int);
 
 
 

@@ -68,9 +68,6 @@ bool has_child(node *n, char *s) {
 	return aux_h_c(n->children, s);
 }
 
-
-
-
 // Copie les enfants et les enfants des enfants etc...
 void copy_node(node *dest, node *origin) {
 	node_list *o = origin->children;
@@ -81,14 +78,7 @@ void copy_node(node *dest, node *origin) {
 	}
 }
 
-void printT(node *n, int depth) {
-	if(n == n->root){
-		    printf(".\n");
-	}  
-	printT_aux(n->children, depth+1);
-}
-
-void printT_aux(node_list *l, int depth){
+void print_aux(node_list *l, int depth){
 	if(l == NULL){
 		return;
 	}
@@ -110,38 +100,8 @@ void printT_aux(node_list *l, int depth){
 	else{
 		printf("%s\n", l->no->title);
 	}	
-	printT(l->no, depth);
-	printT_aux(l->succ, depth);
-}
-
-void p_aux_print(node_list *l) {
-	if(l == NULL) return;
-	printf("%s (%c) ", l->no->title, (l->no->is_folder ? 'D' : 'F'));
-	p_aux_print(l->succ);
-}
-
-
-void rec_aux_print(node_list *l) {
-	if(l == NULL) return;
-	print_node(l->no);
-	rec_aux_print(l->succ);
-}
-
-void print_node(node *node) {
-	if(node == node->root) printf("/ ");
-	else printf("%s ", node->title);
-	printf("(%c), ", node->is_folder ? 'D' : 'F');
-	if(node->root != node) {
-		printf("pere: ");
-		if(node->father == node->root) printf("/ ");
-		else printf("%s ", node->father->title);
-		printf(", ");
-	}
-	printf("%zu fils : ", l_size(node->children));
-	p_aux_print(node->children);
-	printf("\n");
-
-	rec_aux_print(node->children);
+	print(l->no, depth);
+	print_aux(l->succ, depth);
 }
 
 
