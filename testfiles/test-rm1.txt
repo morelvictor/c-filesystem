@@ -5,8 +5,8 @@ cd L1
 mkdir Algebre Analyse Java CI2 PFW
 cd Algebre
 touch cours
+rm ../Java
 cd ..
-rm Java
 rm CI2
 cd PFW
 rm ../PFW
