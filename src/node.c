@@ -81,7 +81,38 @@ void copy_node(node *dest, node *origin) {
 	}
 }
 
+void printT(node *n, int depth) {
+	if(n == n->root){
+		    printf(".\n");
+	}  
+	printT_aux(n->children, depth+1);
+}
 
+void printT_aux(node_list *l, int depth){
+	if(l == NULL){
+		return;
+	}
+	if(l -> succ == NULL){
+		for(int i = 0; i < depth-1; i++) {
+        	printf("│    ");
+    	}
+		printf("└────");
+	}
+	else{
+		for(int i = 0; i < depth-1; i++) {
+        	printf("│    ");
+    	}
+		printf("├────");
+	}
+	if(l->no->is_folder){
+		printf("\033[34;01m%s/\033[00m\n", l->no->title);
+	}
+	else{
+		printf("%s\n", l->no->title);
+	}	
+	printT(l->no, depth);
+	printT_aux(l->succ, depth);
+}
 
 void p_aux_print(node_list *l) {
 	if(l == NULL) return;
