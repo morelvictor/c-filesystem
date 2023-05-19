@@ -92,13 +92,13 @@ void print_aux(node_list *l, int depth){
 	}
 	if(l -> succ == NULL){
 		for(int i = 0; i < depth-1; i++) {
-        	printf("│    ");
+        	printf("     ");
     	}
 		printf("└────");
 	}
 	else{
 		for(int i = 0; i < depth-1; i++) {
-        	printf("│    ");
+        	printf("     ");
     	}
 		printf("├────");
 	}
