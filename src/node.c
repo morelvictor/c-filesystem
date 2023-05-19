@@ -78,6 +78,14 @@ void copy_node(node *dest, node *origin) {
 	}
 }
 
+
+void print_node(node *n, int depth) {
+	if(n == n->root){
+		    printf(".\n");
+	}  
+	print_aux(n->children, depth+1);
+}
+
 void print_aux(node_list *l, int depth){
 	if(l == NULL){
 		return;
@@ -100,7 +108,7 @@ void print_aux(node_list *l, int depth){
 	else{
 		printf("%s\n", l->no->title);
 	}	
-	print(l->no, depth);
+	print_node(l->no, depth);
 	print_aux(l->succ, depth);
 }
 

@@ -160,11 +160,8 @@ void mv(node **curr, w_index *i) {
 	free_path(cpy_path);
 }
 
-void print(node *n, int depth) {
-	if(n == n->root){
-		    printf(".\n");
-	}  
-	print_aux(n->children, depth+1);
+void print(node *n){
+	print_node(n, 0);
 }
 
 void executor(node **n, w_index *i) {
@@ -230,7 +227,7 @@ void executor(node **n, w_index *i) {
 	} else if(!strcmp(i->words[0], "print")) {
 		print_index_in_line(i);
 		if(i->size == 1) {
-			print((*n)->root, 0);
+			print((*n)->root);
 		} else {
 			err_arg_err();
 		}
