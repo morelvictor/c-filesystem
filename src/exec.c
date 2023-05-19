@@ -40,24 +40,17 @@ void cd(node **curr, w_index *i) {
 	}
 }
 
-void pwd_in_line(node **curr) {
-	node_list *acc = NULL;
-	node *tmp = *curr;
-	while (tmp->father != tmp) {
-		acc = l_add(acc, tmp);
-		tmp = tmp->father;
+void pwd_in_line(node *curr) {
+	if(curr == curr->root){
+		printf("\033[34;01m/\033[00m");
+		return;
 	}
-	printf("\033[34;01m/\033[00m");
-	while(acc != NULL){
-		printf("\033[34;01m%s/\033[00m", acc->no->title);
-		node_list *prec = acc;
-		acc = acc->succ;
-		free(prec);
-	}
+	pwd_in_line(curr->father);
+	printf("\033[34;01m%s/\033[00m", curr->title);
 }
 
 void pwd(node **curr) {
-	pwd_in_line(curr);
+	pwd_in_line(*curr);
 	printf("\n");
 }
 
@@ -107,6 +100,10 @@ void cp(node **curr, w_index *i) {
 	node *origin = pton(*curr, cons_path(i->words[1]));
 	if(origin == NULL) {
 		err_no_dest();
+		return;
+	}
+	if(origin == (*curr)->root) {
+		err_edit_root();
 		return;
 	}
 	
@@ -167,15 +164,14 @@ void mv(node **curr, w_index *i) {
 	free_path(cpy_path);
 }
 
-void print(node **curr) {
-	print_node((*curr)->root);
+void print(node *n){
+	print_node(n, 0);
 }
-
 
 void executor(node **n, w_index *i) {
 	if(i->size == 0)
 		return;
-	printf("\033[32;01mVictor-Ayman@Linux-desktop:\033[00m"); pwd_in_line(n); printf("$ ");
+	printf("\033[32;01mVictor-Ayman@Linux-desktop:\033[00m"); pwd_in_line(*n); printf("$ ");
 	if(!strcmp(i->words[0], "ls")) {
 		print_index_in_line(i);
 		if(i->size == 1) {
@@ -235,7 +231,7 @@ void executor(node **n, w_index *i) {
 	} else if(!strcmp(i->words[0], "print")) {
 		print_index_in_line(i);
 		if(i->size == 1) {
-			print(n);
+			print((*n)->root);
 		} else {
 			err_arg_err();
 		}

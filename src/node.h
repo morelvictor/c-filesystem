@@ -33,7 +33,8 @@ extern node *cons_node(bool, char *, node *, node *, node_list *);
 extern bool is_child(node *, node *);
 extern bool has_child(node *, char *);
 extern void copy_node(node *, node *);
-extern void print_node(node *);
+extern void print_aux(node_list *, int);
+extern void print_node(node *, int);
 
 
 

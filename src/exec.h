@@ -16,6 +16,6 @@ extern void touch(node **, w_index *);
 extern void rm(node **, w_index *);
 extern void cp(node **, w_index *);
 extern void mv(node **, w_index *);
-extern void print(node **);
+extern void print(node *);
 */
 #endif
