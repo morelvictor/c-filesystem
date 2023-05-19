@@ -86,30 +86,25 @@ void print_node(node *n, int depth) {
 	print_aux(n->children, depth+1);
 }
 
-void print_aux(node_list *l, int depth){
-	if(l == NULL){
-		return;
-	}
-	if(l -> succ == NULL){
-		for(int i = 0; i < depth-1; i++) {
-        	printf("     ");
-    	}
-		printf("└────");
-	}
-	else{
-		for(int i = 0; i < depth-1; i++) {
-        	printf("     ");
-    	}
-		printf("├────");
-	}
-	if(l->no->is_folder){
-		printf("\033[34;01m%s/\033[00m\n", l->no->title);
-	}
-	else{
-		printf("%s\n", l->no->title);
-	}	
-	print_node(l->no, depth);
-	print_aux(l->succ, depth);
+void print_aux(node_list *l, int depth) {
+    if (l == NULL) {
+        return;
+    }
+	for (int i = 0; i < depth - 1; i++) {
+            printf("    ");  // Ajout des barres verticales ici
+    }
+    if (l->succ == NULL) {
+        printf("└────");
+    } else {    
+        printf("├────");
+    }
+    if (l->no->is_folder) {
+        printf("\033[34;01m%s/\033[00m\n", l->no->title);
+    } else {
+        printf("%s\n", l->no->title);
+    }
+    print_node(l->no, depth);  // Appel à print_node pour les enfants
+    print_aux(l->succ, depth);
 }
 
 

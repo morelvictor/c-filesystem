@@ -102,6 +102,10 @@ void cp(node **curr, w_index *i) {
 		err_no_dest();
 		return;
 	}
+	if(origin == (*curr)->root) {
+		err_edit_root();
+		return;
+	}
 	
 	path *cpy_path = cons_path(i->words[2]);
 	char *cpy_title = cpy_path->index->words[cpy_path->index->size - 1];
