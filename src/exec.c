@@ -1,5 +1,6 @@
 
 #include "exec.h"
+#include "node.h"
 
 
 void ls(node **curr) {
@@ -86,7 +87,10 @@ void rm(node **curr, w_index *i) {
 	// il faut que la cible soit un enfant de current
 	node *n = pton(*curr, cons_path(i->words[1]));
 	if(n != NULL) {
-		//if(is_child(n, *curr)) {
+		if(n == (*curr)->root) {
+			err_edit_root();
+			return;
+		}
 		if(!is_child(*curr, n)) {
 			l_remove(&n->father->children, n);
 			free_node(n);
@@ -135,6 +139,11 @@ void mv(node **curr, w_index *i) {
 	
 	if(origin == (*curr)->root) {
 		err_edit_root();
+		return;
+	}
+
+	if(is_child(*curr, origin)) {
+		err_par_act();
 		return;
 	}
 	
